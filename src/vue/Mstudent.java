@@ -83,6 +83,15 @@ public class Mstudent extends JFrame {
       }
     });
     
+    b4.addActionListener(new ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent event){
+
+      System.out.println("Supprimer un etudiant");
+      SupprEtu e = new SupprEtu();
+      
+      }
+    });
+    
     this.getContentPane().add(boutonpan, BorderLayout.CENTER);
 
     this.setVisible(true);
