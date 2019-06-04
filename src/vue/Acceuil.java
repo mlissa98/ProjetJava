@@ -91,7 +91,7 @@ public class Acceuil extends JFrame {
         
              EleveDAO e =  new EleveDAO();
              e.CreateEleve(100,"lorenzo", "HADJEB");
-
+             e.DeleteEleve(100);
 }
     
 }

@@ -111,18 +111,18 @@ public class Connexion {
         
         
     }
-    public static void DeletePersonne(int id){
-        try{
-           String query="DELETE FROM PERSONNE WHERE id="+id; 
-           cnx=connecterDB();
-           st=cnx.createStatement();
-           st.executeUpdate(query);
-           System.out.println("Personne bien supprimé");
-            
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
+    /* public static void DeletePersonne(int id){
+    try{
+    String query="DELETE FROM PERSONNE WHERE id="+id;
+    cnx=connecterDB();
+    st=cnx.createStatement();
+    st.executeUpdate(query);
+    System.out.println("Personne bien supprimé");
+    
+    }catch(SQLException e){
+    System.out.println(e.getMessage());
     }
+    }*/
    
     public static void rechercheParNom(String nom){
         try{

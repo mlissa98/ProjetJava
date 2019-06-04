@@ -70,7 +70,7 @@ public  void CreateEleve(int id,String nom,String prenom){
     try{
             
             
-          String n = "'"+nom+"'";
+           String n = "'"+nom+"'";
            String p = "'"+prenom+"'";
            
             System.out.println(n);
@@ -86,6 +86,23 @@ public  void CreateEleve(int id,String nom,String prenom){
             System.out.println(e.getMessage());
         }
     }
+
+public void DeleteEleve(int id){
+        try{
+           String query="DELETE FROM ELEVE WHERE id="+id; 
+           cnx=connecterDB();
+           st=cnx.createStatement();
+           st.executeUpdate(query);
+           System.out.println("Personne bien supprimé");
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
+
 
 
 }
