@@ -43,9 +43,9 @@ public class Acceuil extends JFrame {
         //Instanciation d'un objet JPanel
     
     //Définition de sa couleur de fond
-    this.pan.setBackground(Color.BLUE);        
+    this.pan.setBackground(Color.WHITE);        
     //On prévient notre JFrame que notre JPanel sera son content pane
-    this.boutonpan.setBackground(Color.BLUE);
+    this.boutonpan.setBackground(Color.WHITE);
     this.setContentPane(pan);     
     
         
@@ -87,11 +87,9 @@ public class Acceuil extends JFrame {
       
     public static void main(String[] args) {
   
-        //Acceuil a  = new Acceuil();
+        Acceuil a  = new Acceuil();
         
-             EleveDAO e =  new EleveDAO();
-             e.CreateEleve(100,"lorenzo", "HADJEB");
-             e.DeleteEleve(100);
+             
 }
     
 }

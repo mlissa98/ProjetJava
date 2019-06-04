@@ -36,14 +36,16 @@ public class CreerEtu extends JFrame {
     //JPanel pan1 = new JPanel();
     JPanel boutonpan = new JPanel();   
     
-    String name, name1 ;
-    int id ; 
-    JTextField nom , prénom;
+    String name, name1;
+    int id ;
+    
+    
+    JTextField nom , prénom, id1;
     JLabel nomLabel, prenomLabel, idLabel ;
-     EleveDAO e = new EleveDAO();
+    EleveDAO e = new EleveDAO();
           
     
-      public CreerEtu(){
+    public CreerEtu(){
             
     this.setTitle("creer étudiants");
     this.setSize(400, 400);
@@ -60,7 +62,7 @@ public class CreerEtu extends JFrame {
         
     this.setLayout(new BorderLayout());
     
-    this.getContentPane().add(new JLabel("Vous voici dans la rubrique creation d'etudiants"), BorderLayout.NORTH);
+    this.getContentPane().add(new JLabel("Vous voici dans la rubrique création d'etudiants"), BorderLayout.NORTH);
        
     JPanel panNom = new JPanel();
     panNom.setBackground(Color.white);
@@ -82,20 +84,35 @@ public class CreerEtu extends JFrame {
     panPrenom.add(prenomLabel);
     panPrenom.add(prénom);
     
-     JButton b1 = new JButton("creer l'etudiant !");
+    JPanel panId = new JPanel();
+    panId.setBackground(Color.white);
+    panId.setPreferredSize(new Dimension(400, 100));
+    id1 = new JTextField();
+    id1.setPreferredSize(new Dimension(100, 25));
+    panPrenom.setBorder(BorderFactory.createTitledBorder("ID de l'étudiant"));
+    idLabel = new JLabel("Saisir un ID :");
+    panId.add(idLabel);
+    panId.add(id1);
+    
+    JButton b1 = new JButton("creer l'etudiant !");
     
     JPanel Millieu = new JPanel();
     Millieu.add(panNom);
     Millieu.add(panPrenom);
+    Millieu.add(panId);
     Millieu.add(b1);
     
-         b1.addActionListener(new ActionListener(){
+        b1.addActionListener(new ActionListener(){
       public void actionPerformed(java.awt.event.ActionEvent event){
  
           
          
       name = nom.getText();
       name1 = prénom.getText();
+      id = Integer.parseInt(id1.getText());
+      
+      EleveDAO e = new EleveDAO();
+      e.CreateEleve(id, name, name1);
       
      
       
