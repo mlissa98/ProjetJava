@@ -11,9 +11,9 @@ package JDBC;
 import java.sql.*;
 
 public class Connexion {
- static Connection cnx;
- static Statement st;
- static ResultSet rst;
+ public static Connection cnx;
+ public static Statement st;
+ public static ResultSet rst;
   
     /**
      * @param args the command line arguments
@@ -92,23 +92,7 @@ public class Connexion {
         
     }
     
-    public static void CreateEleve(int id,String nom,String prenom){
-        try{
-            
-            String n = "'"+nom+"'";
-            String p = "'"+prenom+"'";
-            System.out.println(n);
-            String query="INSERT INTO ELEVE VALUES("+id+","+n+","+p+")";
-            
-            cnx=connecterDB();
-            st=cnx.createStatement();
-            st.executeUpdate(query);
-            System.out.println("Personne bien ajouté");
-            
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
+    
     
     public static void InscriptionClasse (int id, int classe_id,int eleve_id){
         try{            

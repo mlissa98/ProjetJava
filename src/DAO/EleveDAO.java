@@ -5,6 +5,14 @@
  */
 package DAO;
 
+import static JDBC.Connexion.connecterDB;
+import JDBC.*;
+import static JDBC.Connexion.cnx;
+import static JDBC.Connexion.st;
+import java.sql.SQLException;
+
+
+
 /**
  *
  * @author Meli
@@ -22,6 +30,7 @@ public EleveDAO(int id, String nom, String prenom, boolean type){
     
     
 }
+
 
 public EleveDAO(){
 }
@@ -51,6 +60,32 @@ public void setPrenom(String prenom){
 this.prenom=prenom;
 }
 
+
+
+
+
+
+public  void CreateEleve(int id,String nom,String prenom){
+        
+    try{
+            
+            
+          String n = "'"+nom+"'";
+           String p = "'"+prenom+"'";
+           
+            System.out.println(n);
+            String query="INSERT INTO ELEVE VALUES("+id+","+n+","+p+")";
+           
+            cnx = connecterDB();
+            st = cnx.createStatement();
+            st.executeUpdate(query);
+            System.out.println("Personne bien ajouté");
+            
+        }
+    catch( SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 }

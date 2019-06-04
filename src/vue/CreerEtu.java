@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import DAO.*;
 
 /**
  *
@@ -36,9 +37,11 @@ public class CreerEtu extends JFrame {
     JPanel boutonpan = new JPanel();   
     
     String name, name1 ;
-    JTextField nom , prénom ;
-    JLabel nomLabel, prenomLabel ;
-    
+    int id ; 
+    JTextField nom , prénom;
+    JLabel nomLabel, prenomLabel, idLabel ;
+     EleveDAO e = new EleveDAO();
+          
     
       public CreerEtu(){
             
@@ -89,8 +92,12 @@ public class CreerEtu extends JFrame {
          b1.addActionListener(new ActionListener(){
       public void actionPerformed(java.awt.event.ActionEvent event){
  
+          
+         
       name = nom.getText();
       name1 = prénom.getText();
+      
+     
       
       System.out.println("l'étudiant "+ name + " "+ name1+ " a été ajouté avec succes");
       
@@ -100,6 +107,8 @@ public class CreerEtu extends JFrame {
       
       }
     });
+         
+         e.CreateEleve(WIDTH, name, name);
 
     this.getContentPane().add(Millieu, BorderLayout.CENTER);
 

@@ -21,7 +21,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import DAO.*;
  
 /**
  *
@@ -85,10 +85,12 @@ public class Acceuil extends JFrame {
     this.setVisible(true);
   }   
       
-    public static void main(String[] args){
+    public static void main(String[] args) {
   
-        Acceuil a  = new Acceuil();
-                
+        //Acceuil a  = new Acceuil();
+        
+             EleveDAO e =  new EleveDAO();
+             e.CreateEleve(100,"lorenzo", "HADJEB");
 
 }
     
