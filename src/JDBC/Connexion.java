@@ -18,18 +18,26 @@ public class Connexion {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // TODO code application logic here
         
          //AjouterP(100,"AAAA",50.50,15,"Informatique",1);
         
         //SupprimerParID(3);
         
-        AjouterP(2,"meli", "melo",true);
         
         
+        //AjouterP(10,"lorenzo", "njitche",true);
+        //RechercherP(10);
         
-                
+        //DeleteEvaluation(55);
+        //CreateEvaluation(56,27,10,"AB");
+        //UpdateEvaluation(55,27,16,"TB");
+        //CreatePersonne(23,"lorenzo", "njitche",true);
+        //UpdatePersonne(100,"lorenzo", "HADJEB",true );
+        CreateEleve(100,"lorenzo", "HADJEB");
+        InscriptionClasse (19,2,100);
+        
           try{
               cnx=connecterDB(); 
               st=cnx.createStatement();
@@ -46,19 +54,19 @@ public class Connexion {
               ex.printStackTrace();
           } 
      
-    }
+    }*/
     
   
     
     public static Connection  connecterDB(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Driver oki");
+            
             String url="jdbc:mysql://localhost:8889/Ecole";
             String user="root";
             String password="root";
            Connection cnx=DriverManager.getConnection(url,user,password);
-            System.out.println("Connexion bien établié");
+            System.out.println("Connexion bien établie");
             return cnx;
         }catch(Exception e){
             e.printStackTrace();
@@ -66,9 +74,12 @@ public class Connexion {
         }
     }
    
-    public static void AjouterP(int id,String nom,String prenom,boolean type){
+    public static void CreatePersonne(int id,String nom,String prenom,boolean type){
         try{
-            String query="INSERT INTO PERSONNE VALUES('"+id+" "+nom+" "+prenom+" "+type+"')";
+            String n = "'"+nom+"'";
+            String p = "'"+prenom+"'";
+            System.out.println(n);
+            String query="INSERT INTO PERSONNE VALUES("+id+","+n+","+p+","+type+")";
             cnx=connecterDB();
             st=cnx.createStatement();
             st.executeUpdate(query);
@@ -80,8 +91,43 @@ public class Connexion {
         
         
     }
-   
-    public static void SupprimerParID(int id){
+    
+    public static void CreateEleve(int id,String nom,String prenom){
+        try{
+            
+            String n = "'"+nom+"'";
+            String p = "'"+prenom+"'";
+            System.out.println(n);
+            String query="INSERT INTO ELEVE VALUES("+id+","+n+","+p+")";
+            
+            cnx=connecterDB();
+            st=cnx.createStatement();
+            st.executeUpdate(query);
+            System.out.println("Personne bien ajouté");
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static void InscriptionClasse (int id, int classe_id,int eleve_id){
+        try{            
+            
+            String query="INSERT INTO INSCRIPTION VALUES("+id+","+classe_id+","+eleve_id+")";
+           System.out.println(query);
+            
+            cnx=connecterDB();
+            st=cnx.createStatement();
+            st.executeUpdate(query);
+            System.out.println("Personne bien inscrite");
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }
+    public static void DeletePersonne(int id){
         try{
            String query="DELETE FROM PERSONNE WHERE id="+id; 
            cnx=connecterDB();
@@ -116,12 +162,9 @@ public class Connexion {
         
     }
     
-   public static void ModifierP(int id,String nom,String prenom,boolean type ){
+   public static void UpdatePersonne(int id,String nom,String prenom,boolean type ){
        try{
-           String query="UPDATE PERSONNE SET nom='"+nom
-                   +"', prenom="+prenom
-                   +", type="+type
-                   +" WHERE id="+id;
+           String query="UPDATE PERSONNE SET nom='"+nom+"', prenom='"+prenom+"', type="+type+" WHERE id="+id;
            cnx=connecterDB();
            st=cnx.createStatement();
            st.executeUpdate(query);
@@ -135,8 +178,80 @@ public class Connexion {
    }
     
     
-    
-    
+     public static void RechercherP(int id){
+       try{
+          
+           String query="SELECT NOM FROM  PERSONNE  WHERE id="+id;
+           System.out.println(query);
+           cnx=connecterDB();
+           st=cnx.createStatement();
+           ResultSet rs = st.executeQuery(query);
+           //st.executeQuery(query);
+           while (rs.next()) {
+                String lastName = rs.getString("NOM");
+                System.out.println(lastName + "\n");
+            }     
+           System.out.println("fin recherche p");
+           
+       }catch(SQLException e){
+           System.out.println(e.getMessage());
+       }
+       
+       
+   }
    
+     public static void CreateEvaluation(int id,int detailbulletin_id ,double note,String appreciation){
+        try{
+            String a = "'"+appreciation+"'";
+            
+            System.out.println(a);
+            String query="INSERT INTO EVALUATION VALUES("+id+","+note+","+a+","+detailbulletin_id+")";
+            cnx=connecterDB();
+            st=cnx.createStatement();
+            st.executeUpdate(query);
+            System.out.println("EVALUATION bien ajouté");
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }
+     
+     public static void DeleteEvaluation(int id){
+        try{
+           String query="DELETE FROM EVALUATION WHERE id="+id; 
+           cnx=connecterDB();
+           st=cnx.createStatement();
+           st.executeUpdate(query);
+           System.out.println("EVALUATION bien supprimé");
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+     
+     
+     
+    
+   public static void UpdateEvaluation( int id,int id_detailbulletin, double note, String appreciation){
+       try{
+            System.out.println("cc");
+        String a = "'"+appreciation+"'";
+           
+           String query="UPDATE EVALUATION SET note='"+note+"', id_detailbulletin='"+id_detailbulletin+"', appreciation="+a+" WHERE id="+id;
+           cnx=connecterDB();
+           st=cnx.createStatement();
+           st.executeUpdate(query);
+           System.out.println("Produit bien modifié");
+           
+       }catch(SQLException e){
+           System.out.println(e.getMessage());
+       }
+       
+       
+   }
+   
+
     
 }
